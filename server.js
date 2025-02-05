@@ -71,10 +71,29 @@ app.get('/api/data', (req, res) => {
 });
 
 // ✅ Start Express Locally
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(3000, () =>
-    console.log('✅ Server running on http://localhost:3000')
-  );
+if (!process.env.VERCEL && process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 3000;
+
+  // Check if server is already running before starting
+  import('net')
+    .then((net) => {
+      const server = net.createServer();
+      server.once('error', (err) => {
+        if (err.code === 'EADDRINUSE') {
+          console.log(
+            `⚠️ Port ${PORT} is already in use. Skipping manual binding.`
+          );
+        }
+      });
+      server.once('listening', () => {
+        server.close();
+        app.listen(PORT, () =>
+          console.log(`✅ Server running on http://localhost:${PORT}`)
+        );
+      });
+      server.listen(PORT);
+    })
+    .catch((err) => console.error(`❌ Failed to check port:`, err));
 }
 
 // ✅ Export for Vercel
