@@ -1,13 +1,12 @@
-# RO Plant API
+# 🎉 RO Plant API
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node.js CI](https://github.com/ShaheerIslam1211/ro-plant-api/workflows/Node.js%20CI/badge.svg)](https://github.com/ShaheerIslam1211/ro-plant-api/actions)
 
 A robust and scalable Node.js backend API for monitoring and controlling RO (Reverse Osmosis) plant systems. This project integrates sensor data via Arduino, serves the data through a RESTful API, and provides a dynamic Next.js frontend to display real-time information, notifications, and detailed logs.
 
 ---
 
-## Table of Contents
+## 👀 Table of Contents
 
 - [Overview](#overview)
 - [Features](#features)
@@ -15,19 +14,16 @@ A robust and scalable Node.js backend API for monitoring and controlling RO (Rev
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
 
 ---
 
-## Overview
+## 🤷 Overview
 
 The **RO Plant API** project is designed to seamlessly integrate hardware sensor data with a modern web interface. Using an Arduino to collect sensor readings, the data is transmitted to our Node.js backend where it is processed and made available via API endpoints. The Next.js frontend consumes these endpoints to provide real-time updates, notifications, and formatted visualizations, ensuring every aspect of the RO plant's performance is monitored and displayed accurately.
 
 ---
 
-## Features
+## ✨ Features
 
 - **Real-time Sensor Data:** Integrates Arduino sensor readings with the API.
 - **API Endpoints:** RESTful API for fetching sensor data, system status, and logs.
