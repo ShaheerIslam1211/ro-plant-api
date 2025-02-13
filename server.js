@@ -11,6 +11,19 @@ app.use(express.urlencoded({ extended: true, limit: "1mb" }));
 // ✅ Store sensor data (Use a database for production)
 let sensorData = [];
 
+// ✅ Function to format timestamp
+const getFormattedTimestamp = () => {
+  return new Date().toLocaleString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    hour12: true,
+  });
+};
+
 // ✅ POST: Receive Data from Arduino
 app.post("/api/data", (req, res) => {
   console.log(`🟢 [LOG] Processing POST request to /api/data`);
@@ -23,8 +36,11 @@ app.post("/api/data", (req, res) => {
       return res.status(400).json({ message: "Invalid JSON format!" });
     }
 
-    // ✅ Store received data dynamically (accept any JSON fields)
-    const receivedData = { ...req.body, timestamp: new Date().toISOString() };
+    // ✅ Store received data dynamically with formatted timestamp
+    const receivedData = { 
+      ...req.body, 
+      timestamp: getFormattedTimestamp() 
+    };
 
     sensorData.push(receivedData);
 
@@ -53,6 +69,7 @@ app.get("/api/data", (req, res) => {
 // ✅ Start Express Server (Glitch uses `process.env.PORT`)
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+
 
 // const express = require("express");
 // const cors = require("cors");
